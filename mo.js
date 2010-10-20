@@ -30,26 +30,30 @@ var allImages = document.getElementsByTagName( 'img' ),
     , 'hogan', 'hungarian', 'khan', 'magnum', 'pencil', 'poirot'
     , 'porn', 'regular', 'walrus', 'zappa'
   ],
-  toMo = [],
   randomMoIndex, 
   newMo, 
   position;
 
-for( var imgIndex = 0; imgIndex < allImages.length; imgIndex++ ) {
-    if( -1 !== allImages[imgIndex].src.indexOf( 'thumb_' ) ) {
+var imgCount = allImages.length;
+for( var imgIndex = 0; imgIndex < imgCount; imgIndex++ ) {
+    if( -1 !== allImages[imgIndex].src.indexOf( 'miscellanean.com' ) ) {
+        body.removeChild( allImages[imgIndex] );
+    }
+    
+    if( allImages[imgIndex] && -1 !== allImages[imgIndex].src.indexOf( 'thumb_' ) ) {
         randomMoIndex = Math.floor( Math.random() * (moNames.length) );
 
         newMo = document.createElement("img");
         newMo.setAttribute("src", moBase + moNames[randomMoIndex] + moExt );
         body.appendChild( newMo );
-
         position = findPos( allImages[imgIndex] );
+        
         newMo.style.position = 'absolute';
         newMo.style.top = (position[1] + vOffset) + "px"; 
         newMo.style.left = position[0] + "px";
-        newMo.style.width = "50px";
-        
-        toMo[toMo.length] = newMo;        
+        if( allImages[imgIndex].width ) {
+            newMo.style.width = allImages[imgIndex].width + "px";
+        }
     }
 }
 
