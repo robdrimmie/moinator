@@ -1,6 +1,8 @@
 $(document).ready( function() {
   $("#moification").hide();
 
+  // Step 1: Retrieve the Twitter profile to pic. 
+  // Display to user with a halo of mos
   $("#moify").submit( function() {
     if( '' == $("#twitter_username") ) {
       alert( "can't have an empty username" );
@@ -9,29 +11,24 @@ $(document).ready( function() {
 
     $("#get_username").fadeOut("fast");
 
-    $.ajax({
-      url: 'imager.php',
-      data: { twitter_username: $("#twitter_username").val() }, 
-      success: function( data ) {
-        var twimage = $("#moification").add("img");
-//        twimage.attr("src") = data;
-        console.log( data );
+    var twitter_url = "https://api.twitter.com/1/users/profile_image?size=original&screen_name=";
+    twitter_url += $("#twitter_username").val();
 
-        $("#moification").fadeIn("slow"); 
-        return false;
-      },
+    $("#profile_pic").attr( "src", twitter_url );
 
-      error: function( data, txt, thr ) {
-        $("#get_username").fadeIn("fast");
-        console.log( 'err' );
-        console.log( data );
-        console.log( txt );
-        console.log( thr );
-        return false;
-      } 
-    });
-    
+    $("#moification").fadeIn("fast");
+
     return false;
+  });
+
+  // Step 2: user selects a mo, drags it onto the profile pic.
+  // logic: loop through images, attach drag handler onto each that
+  // stores  somewhere: mo and top/left.
+
+  // Step 3: user saves mo'd profile pic, stored as image on server
+  // and user is redirect to image url 
+  $("#doit").submit( function() {
+    
   });
 
 });
