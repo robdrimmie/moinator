@@ -1,9 +1,10 @@
 $(document).ready( function() {
   console.log( 'foo' );
+
+  
+  $("#moify").submit( function() {
+    alert( 'foo' );
+    return false;
+  });
 });
 
-$("#imager").submit( function( event ) {
-  alert( 'foo' );
-  event.stopPropagation();
-  return false;
-});
