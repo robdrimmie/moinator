@@ -15,13 +15,6 @@
 //   mo_x               integer   horizontal offset (left = 0) of the mo relative to the profile picture
 //   mo_y               integer   vertical offset (top = 0) of the mo relative to the profile picture
 
-$height = 0;
-$string = $_REQUEST['text'];
-if (strlen($string) == 0){
- $string = $HTTP_SERVER_VARS['QUERY_STRING'];
- $string = urldecode($string);
-}
-
 $twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name={$_GET['twitter_username']}&size=original";
 // this is badness. this call is rate limited, 150 per hour, and 
 // since it depends on a 302 redirect to get to the image file 
@@ -30,6 +23,8 @@ $twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name={$_GET
 // better stuff required
 $avatartype =  exif_imagetype( $twitter_url );
 $size = getimagesize( $twitter_url );
+$imwidth = $size[0];
+$imheight = $size[1];
 switch( $size["mime"] ) {
 case "image/gif":
   $im = imagecreatefromgif( $twitter_url );
@@ -46,9 +41,12 @@ default:
   die( 'unknown image type' );
 }
 
-$stache = imagecreatefrompng( "./badstache.png" );
-$imwidth = $size[0];
-$imheight = $size[1];
+if( array_key_exists( 'mo_file', $_GET ) ) {
+  $mo_file = $_GET[ "mo_file" ];
+} else {
+  $mo_file = "badstache.png";
+}
+$stache = imagecreatefrompng( $mo_file );
 
 $dstx = ( $imwidth / 2 ) - 40;
 $dsty = ( ( $imheight / 3 ) * 2 ) - 22;
