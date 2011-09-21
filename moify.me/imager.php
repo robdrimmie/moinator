@@ -1,4 +1,20 @@
 <?php
+// The imager creates a new image based on the combination
+// of a user's Twitter profile image and their selected
+// mo and the placement of the mo.
+//
+// The image is stored in the database and a unique identifier
+// is created for it. Non-sequential 'cause I don't want people
+// creeping the system, but I also don't want it to be like a 
+// huge-ass 24-character hash string so I will see what I can do 
+// about that.
+//
+// Four parameters are required:
+//   twitter_username   string    The user's twitter username
+//   mo_file            string    The filename of the selected mo
+//   mo_x               integer   horizontal offset (left = 0) of the mo relative to the profile picture
+//   mo_y               integer   vertical offset (top = 0) of the mo relative to the profile picture
+
    $height = 0;
    header("Content-type: image/png");
    $string = $_REQUEST['text'];
