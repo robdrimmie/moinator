@@ -18,6 +18,8 @@ $(document).ready( function() {
 
     $("#moification").fadeIn("fast");
 
+
+    $("#doit_twitter_username").val( $("#twitter_username").val() );
     return false;
   });
 
@@ -28,8 +30,6 @@ $(document).ready( function() {
   // Step 3: user saves mo'd profile pic, stored as image on server
   // and user is redirect to image url 
   $("#doit").submit( function() {
-    
   });
 
 });
-

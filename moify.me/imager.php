@@ -15,7 +15,13 @@
 //   mo_x               integer   horizontal offset (left = 0) of the mo relative to the profile picture
 //   mo_y               integer   vertical offset (top = 0) of the mo relative to the profile picture
 
-$twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name={$_GET['twitter_username']}&size=original";
+if( array_key_exists( 'twitter_username', $_GET ) ) {
+  $twitter_username = $_GET['twitter_username'];
+} else {
+  $twitter_username = 'seanyo';
+}
+
+$twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name={$twitter_username}&size=original";
 // this is badness. this call is rate limited, 150 per hour, and 
 // since it depends on a 302 redirect to get to the image file 
 // and I am not storing the image which means at least two requests
@@ -36,8 +42,10 @@ case "image/jpeg":
   $im = imagecreatefromjpeg( $twitter_url );
   break;
 default:
+  var_dump( $_GET );
+  var_dump( $_REQUEST );
+  var_dump( $twitter_url );
   var_dump( $avatartype );
-  var_dump( IMAGETYPE_GIF );
   die( 'unknown image type' );
 }
 
