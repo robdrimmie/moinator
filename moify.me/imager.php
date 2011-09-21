@@ -48,8 +48,17 @@ if( array_key_exists( 'mo_file', $_GET ) ) {
 }
 $stache = imagecreatefrompng( $mo_file );
 
-$dstx = ( $imwidth / 2 ) - 40;
-$dsty = ( ( $imheight / 3 ) * 2 ) - 22;
+if( array_key_exists( 'mo_x', $_GET ) ) {
+  $mo_x = $_GET[ 'mo_x' ];
+} else {
+  $mo_x = ( $imwidth / 2 ) - 40;
+}
+
+if( array_key_exists( 'mo_y', $_GET ) ) {
+  $mo_y = $_GET[ 'mo_y' ];
+} else {
+  $mo_y = ( ( $imheight / 3 ) * 2 ) - 22;
+}
 
 switch( $_GET['twitter_username'] ) {
  case 'cutegecko':
@@ -68,7 +77,7 @@ switch( $_GET['twitter_username'] ) {
    $dsty = 170;
    break;
 }
-imagecopy( $im, $stache, $dstx, $dsty, 0, 0, 80, 45 );
+imagecopy( $im, $stache, $mo_x, $mo_y, 0, 0, 80, 45 );
 
 header("Content-type: image/png");
 imagepng($im);
