@@ -1,4 +1,5 @@
 <?php
+// copy to imgur.config.php, add your info, blah blah blah.
 
-$consumer_key = "";
-$consumer_secret = "";
+define( 'IMGUR_CONSUMER_KEY', '' );
+define( 'IMGUR_CONSUMER_SECRET', '' );
