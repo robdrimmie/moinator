@@ -7,23 +7,24 @@ class Imgur
   private $imgur_key = 'c02cf763a98928e08c922a64533a42e6';
 
   function __construct() {
-    echo "newimgur";
+  }
 
-    $img = imagecreatefromstring(file_get_contents(
-      "badstache.png"
-    ));
-    
+  function image_to_base64( $image ) {
     ob_start();
-    imagejpeg($img,null,80);
-    $data = base64_encode(ob_get_clean());
-    imagedestroy($img); 
+    imagejpeg( $image, null, 80 );
+    $data = base64_encode( ob_get_clean() );
+
+    return $data;
+  }
+
+  function upload( $image, $title = "moifymetitle", $caption = "moifymecaption" ) {
     $request = array(
-      'name' => 'moifyme'.time().'.jpg',
+      'name' => 'moifyme' . time() . '.jpeg',
       'type' => 'base64',
-      'title' => 'moifymetitle',
-      'caption' => 'moifymecaption',
+      'title' => $title,
+      'caption' => $caption,
       'key' => $this->imgur_key,
-      'image' => $data,
+      'image' => $this->image_to_base64( $image )
     );
 
     $curl = curl_init("http://api.imgur.com/2/upload.json");
@@ -37,8 +38,7 @@ class Imgur
 }
 
 $imgur = new Imgur();
-$foo = new OAuth( 
-  IMGUR_CONSUMER_KEY
-  , IMGUR_CONSUMER_SECRET
-  , OAUTH_SIG_METHOD_HMACSHA1,OAUTH_AUTH_TYPE_URI
-);
+
+$twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name=RobDrimmie&size=original";
+$image = imagecreatefromjpeg( $twitter_url );
+$imgur->upload( $image );
