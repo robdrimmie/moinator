@@ -15,6 +15,8 @@
 //   mo_x               integer   horizontal offset (left = 0) of the mo relative to the profile picture
 //   mo_y               integer   vertical offset (top = 0) of the mo relative to the profile picture
 
+require_once( "imgur.php" );
+
 if( array_key_exists( 'twitter_username', $_GET ) ) {
   $twitter_username = $_GET['twitter_username'];
 } else {
@@ -87,7 +89,10 @@ switch( $_GET['twitter_username'] ) {
 }
 imagecopy( $im, $stache, $mo_x, $mo_y, 0, 0, 80, 45 );
 
+$imgur = new Imgur();
+var_dump( $imgur->upload( $im ) );
 header("Content-type: image/png");
 imagepng($im);
 imagedestroy($im);
+
 ?>

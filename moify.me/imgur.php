@@ -32,13 +32,8 @@ class Imgur
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($curl,CURLOPT_POSTFIELDS,$request);
     $ret = json_decode(curl_exec($curl),true);
-
     var_dump( $ret );
+    die();
+    return $ret;
   }
 }
-
-$imgur = new Imgur();
-
-$twitter_url = "https://api.twitter.com/1/users/profile_image?screen_name=RobDrimmie&size=original";
-$image = imagecreatefromjpeg( $twitter_url );
-$imgur->upload( $image );
