@@ -3,6 +3,9 @@ require_once( 'imgur.config.php' );
 
 class Imgur
 {
+
+  private $imgur_key = 'c02cf763a98928e08c922a64533a42e6';
+
   function __construct() {
     echo "newimgur";
 
@@ -19,24 +22,15 @@ class Imgur
       'type' => 'base64',
       'title' => 'moifymetitle',
       'caption' => 'moifymecaption',
-      'key' => IMGUR_CONSUMER_KEY,
+      'key' => $this->imgur_key,
       'image' => $data,
-      'oauth_consumer_key' => IMGUR_CONSUMER_KEY
-//      , 'oauth_token' => IMGUR
     );
 
-    $curl = curl_init("https://api.imgur.com/oauth/request_token?"
-     . http_build_query( $request )
-   );
-
-
-
-//    $curl = curl_init("http://api.imgur.com/2/upload.json");
-    //curl_setopt($curl,CURLOPT_POST,true);
+    $curl = curl_init("http://api.imgur.com/2/upload.json");
+    curl_setopt($curl,CURLOPT_POST,true);
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-    //curl_setopt($curl,CURLOPT_POSTFIELDS,$request);
-    var_dump(curl_exec($curl));
-    //$ret = json_decode(curl_exec($curl),true);
+    curl_setopt($curl,CURLOPT_POSTFIELDS,$request);
+    $ret = json_decode(curl_exec($curl),true);
 
     var_dump( $ret );
   }
