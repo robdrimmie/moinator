@@ -1,0 +1,8 @@
+<?php
+// lame-o no class-o.
+// switch it up for your system.
+
+$database_user = '';
+$database_password = '';
+$database_host = '';
+$database_name = '';
