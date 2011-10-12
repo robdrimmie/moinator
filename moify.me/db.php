@@ -1,11 +1,25 @@
 <?php
 
+
+class Moify_Db
+{
+
+  protected $_conn;
+  
+  public function __construct( $host, $user, $pw ) {
+    $conn = mysql_connect( $host, $user, $pw );
+    
+    if( !$conn ) {
+      die( 'Error connecting to mysql' );
+      var_dump( $conn );
+    }
+
+    $this->_conn = $conn;
+  }
+
+}
+
 require_once 'db.config.php';
 
-$db_connection = mysql_connect( 
-  $database_host
-  , $database_user
-  , $database_password 
-);
-
-var_dump( $db_connection );
+$mdb = new Moify_Db( $database_host, $database_user, $database_password );
+var_dump( $mdb );
