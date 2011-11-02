@@ -32,8 +32,7 @@ class Imgur
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($curl,CURLOPT_POSTFIELDS,$request);
     $ret = json_decode(curl_exec($curl),true);
-    var_dump( $ret );
-    die();
+    
     return $ret;
   }
 }
