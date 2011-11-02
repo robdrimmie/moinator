@@ -2,7 +2,7 @@
 // lame-o no class-o.
 // switch it up for your system.
 
-$database_user = '';
-$database_password = '';
-$database_host = '';
-$database_name = '';
+define( MOIFY_DB_USER, '' );
+define( MOIFY_DB_PASSWORD, '' );
+define( MOIFY_DB_HOST, '' );
+define( MOIFY_DB_NAME, '' );
