@@ -1,5 +1,5 @@
 CREATE TABLE moify (
-  id integer auto_increment
+  id integer primary key auto_increment
   , twitter_username varchar(255) not null
   , imgur_of_original varchar(1024) not null
   , imgur_of_moified varchar(1024) not null
