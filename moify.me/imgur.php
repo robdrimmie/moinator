@@ -16,7 +16,7 @@ class Imgur
 
     return $data;
   }
-
+// logic problem here abouts. only uploading moified presently.
   function upload( $image, $title = "moifymetitle", $caption = "moifymecaption" ) {
     $request = array(
       'name' => 'moifyme' . time() . '.jpeg',
@@ -32,7 +32,8 @@ class Imgur
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($curl,CURLOPT_POSTFIELDS,$request);
     $ret = json_decode(curl_exec($curl),true);
-    
+
     return $ret;
   }
+
 }

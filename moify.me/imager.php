@@ -88,15 +88,20 @@ switch( $_GET['twitter_username'] ) {
    $dsty = 170;
    break;
 }
-imagecopy( $im, $stache, $mo_x, $mo_y, 0, 0, 80, 45 );
 
 $imgur = new Imgur();
-$imgur->upload( $im  );
+$original = $imgur->upload( $im  );
+
+imagecopy( $im, $stache, $mo_x, $mo_y, 0, 0, 80, 45 );
+$moified= $imgur->upload( $im );
+
+
 //header("Content-type: image/png");
 //imagepng($im);
-//imagedestroy($im);
+imagedestroy($im);
 echo "<br /><br /><br />";
 echo "<h2>database</h2>";
 $db = new Moify_DB();
-var_dump( $db );
+$db->add( $original, $moified );
+
 ?>

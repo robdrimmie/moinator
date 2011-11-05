@@ -7,7 +7,7 @@ class Moify_Db
   protected $_conn;
 
   public function __construct( $host = MOIFY_DB_HOST, $user = MOIFY_DB_USER, $pw = MOIFY_DB_PASSWORD ) {
-    $conn = mysql_connect( $host, $user, $pw );
+    $conn = mysqli_connect( $host, $user, $pw );
 
     if( !$conn ) {
       die( 'Error connecting to mysql' );
@@ -27,13 +27,15 @@ class Moify_Db
    * top
    * left
    */
-  public function add(
-    $twitter_username
+  public function add( $original, $moified ) {
+    var_dump( $original );
+    var_dump( $moified );
+    /*$twitter_username
     , $imgur_of_original
     , $imgur_of_moified
     , $chosen_mo
     , $mo_top
-    , $mo_left ) {
+    , $mo_left ) {*/
     // add a mo to the table
   }
 
