@@ -102,6 +102,6 @@ imagedestroy($im);
 echo "<br /><br /><br />";
 echo "<h2>database</h2>";
 $db = new Moify_DB();
-$db->add( $original, $moified );
+$db->add( $twitter_username, $original['upload']['links']['original'], $moified['upload']['links']['original'], $mo_file, $mo_y, $mo_x );
 
 ?>
