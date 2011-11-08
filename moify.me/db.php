@@ -32,14 +32,9 @@ class Moify_Db
     $stmt = mysqli_prepare( $this->_conn, 
       'INSERT INTO moify ( twitter_username, imgur_of_original, imgur_of_moified, chosen_mo, mo_top, mo_left )
       VALUES( ?, ?, ?, ?, ?, ? )' );
-var_dump( $stmt );
-var_dump( $this->_conn );
     $stmt->bind_param( 'ssssii', $twitter_username, $imgur_of_original, $imgur_of_moified, $chosen_mo, $mo_top, $mo_left );
 
-    var_dump( 'c' );
     $stmt->execute();
-    var_dump( $stmt );
-    echo "%d Row inserted.\n" . $stmt->affected_rows;
 
     $stmt->close();
 
